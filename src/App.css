@@ -124,6 +124,7 @@ body {
 	color: #fff;
 	align-self: flex-end;
 	position: relative;
+	text-align: right;
 }
 
 .user-message:after {

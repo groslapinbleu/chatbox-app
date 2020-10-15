@@ -15,11 +15,12 @@ class Message extends Component {
         return time;
     }
 
-    render() {
-        const { chat } = this.props
-        return (<p className="user-message">{chat.pseudo}: {chat.msg} {this.formatTime(chat.timestamp)}
-        </p>
-        );
+    render() {        const { chat, currentUser } = this.props
+        if (currentUser===chat.pseudo) {
+            return (<p className="user-message">{chat.msg}</p>)
+        } else {
+            return (<p className="not-user-message"><strong>{chat.pseudo}: </strong>{chat.msg}</p>)
+        }
     }
 }
 
