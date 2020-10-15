@@ -1,10 +1,14 @@
 import React, { Component, createRef } from 'react'
 import './App.css'
+import './animation.css'
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
 import Chat from './models/Chat'
 import base from './services/firebase'
-
+import {
+  CSSTransition, 
+  TransitionGroup
+} from 'react-transition-group'
 
 class App extends Component {
   state = {
@@ -41,14 +45,18 @@ class App extends Component {
 
   render() {
     const chats = Object.keys(this.state.chats).map(key => (
-      <Message key={key} chat={this.state.chats[key]} currentUser={this.state.pseudo} />
+      <CSSTransition  key={key} timeout={200} classNames='fade'>
+      <Message chat={this.state.chats[key]} currentUser={this.state.pseudo} />
+      </CSSTransition>
     ))
 
     return (
       <div className='box'>
         <div>
           <div className="messages" ref={this.chatsRef}>
+            <TransitionGroup className="message">
             {chats}
+            </TransitionGroup>
           </div>
         </div>
         <Formulaire length={140} createNewChat={this.createNewChat} />
