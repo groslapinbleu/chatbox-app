@@ -3,6 +3,8 @@ import './App.css'
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
 import Chat from './models/Chat'
+import base from './services/firebase'
+
 
 class App extends Component {
   state = {
@@ -10,15 +12,23 @@ class App extends Component {
     chats: [
       new Chat(0, 'Bonjour', 'Antoine'),
       new Chat(1, 'Salut', 'Karine')
-    ]
+    ],
   }
 
+
+/*   componentDidMount() {
+    base.syncState('/', {
+      context: this,
+      state: 'chats' // cette ligne fout la merde. Est-ce que chats devrait être un objet plutôt qu'un tableau
+    })
+  } */
 
   createNewChat = (msg) => {
     const chats = [...this.state.chats]
     chats.push({ timestamp: Date.now(), msg: msg, pseudo: this.state.pseudo })
     this.setState({ chats: chats })
   }
+
   render() {
     return (
       <div className='box'>
